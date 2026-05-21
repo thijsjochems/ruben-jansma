@@ -193,17 +193,19 @@
       position: relative;
       z-index: 1;
       padding: 0 clamp(24px, 5vw, 80px);
-      max-width: 960px;
+      max-width: 1080px;
     }
     .hero-headline {
       font-family: var(--font-heading);
       font-weight: var(--heading-weight);
-      font-size: clamp(2.25rem, 5.5vw, 5rem);
-      letter-spacing: 0.2em;
+      font-size: clamp(2rem, 4.4vw, 3.5rem);
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      line-height: 1.25;
+      line-height: 1.3;
       color: var(--text-light);
       margin-bottom: 2rem;
+      text-align: center;
+      text-indent: 0.1em; /* compenseert trailing letter-spacing voor optisch centreren */
     }
     .hero-sub {
       font-family: var(--font-body);
@@ -358,6 +360,12 @@
     }
     .gallery-wide { aspect-ratio: 21/9; }
     .gallery-portrait { aspect-ratio: 4/5; }
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     /* ── Form ── */
     #contact { padding: clamp(80px, 12vw, 160px) 0; }
@@ -548,7 +556,7 @@
   <section id="hero" class="section-dark">
     <div class="hero-content">
       <h1 class="hero-headline">De ultieme ontsnapping.<br>Geperfectioneerd padel.</h1>
-      <p class="hero-sub">Een intieme week van op maat gemaakte training en mediterrane rust in je eigen besloten villa.</p>
+      <p class="hero-sub">Een sportieve week met op maat gemaakte Padel-training en mediterrane rust in je eigen besloten villa.</p>
       <a href="#ervaring" class="hero-cta">Ontdek de ervaring</a>
     </div>
     <div class="scroll-indicator"></div>
@@ -613,7 +621,7 @@
         <h2 class="section-title">Op maat gemaakt meesterschap</h2>
       </div>
       <div class="coaching-body reveal reveal-delay-1">
-        <p>Onze Spaanse coaches — elk met een achtergrond op professioneel niveau — creëren een volledig gepersonaliseerd trainingsprogramma dat aansluit bij jouw ambitie en speelstijl. Van technische verfijning en tactische strategie tot mentale weerbaarheid: elke sessie is ontworpen om je spel naar een hoger niveau te tillen.</p>
+        <p>Spaanse en Nederlandse coaches — elk met een achtergrond op professioneel niveau — creëren een volledig gepersonaliseerd trainingsprogramma dat aansluit bij jouw ambitie en speelstijl. Van technische verfijning en tactische strategie tot mentale weerbaarheid: elke sessie is ontworpen om je spel naar een hoger niveau te tillen.</p>
       </div>
       <div class="coaching-features reveal reveal-delay-2">
         <span>Persoonlijke videoanalyse</span>
@@ -631,8 +639,8 @@
         <div class="gallery-placeholder gallery-wide">luchtfoto van het privécomplex bij zonsondergang</div>
       </div>
       <div class="gallery-grid gallery-row-duo reveal reveal-delay-1">
-        <div class="gallery-placeholder gallery-portrait">padeltraining op de courts in het ochtendlicht</div>
-        <div class="gallery-placeholder gallery-portrait">het zwembad en terras van de villa bij schemering</div>
+        <img class="gallery-image gallery-portrait" src="images/terras-golfbaan.jpeg" alt="Uitzicht op de golfbaan en palmen vanaf het terras van de villa" loading="lazy">
+        <img class="gallery-image gallery-portrait" src="images/terras-schemering.jpeg" alt="Het terras van de villa met loungestoelen in de schemering" loading="lazy">
       </div>
     </div>
   </section>
