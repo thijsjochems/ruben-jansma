@@ -1,0 +1,20 @@
+# Briefing / interne documenten — niet committen
+briefing/
+
+# Lokale tooling-config
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Dependencies / build
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.log
