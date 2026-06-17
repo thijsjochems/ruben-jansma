@@ -300,6 +300,13 @@
       margin-bottom: 1.5rem;
       color: var(--text-dark);
     }
+    .villa-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      margin-bottom: clamp(24px, 4vw, 40px);
+    }
 
     /* ── Coaching ── */
     #coaching { padding: clamp(80px, 12vw, 160px) 0; }
@@ -340,6 +347,7 @@
     }
     .gallery-row-wide { grid-template-columns: 1fr; }
     .gallery-row-duo { grid-template-columns: 1fr 1fr; }
+    .gallery-row-trio { grid-template-columns: repeat(3, 1fr); }
     .gallery-placeholder {
       width: 100%;
       display: flex;
@@ -360,6 +368,7 @@
     }
     .gallery-wide { aspect-ratio: 21/9; }
     .gallery-portrait { aspect-ratio: 4/5; }
+    .gallery-tall { aspect-ratio: 3/4; }
     .gallery-image {
       width: 100%;
       height: 100%;
@@ -548,12 +557,14 @@
       .villa-grid { grid-template-columns: 1fr; gap: 48px; }
       .villa-divider { display: none; }
       .gallery-row-duo { grid-template-columns: 1fr; }
+      .gallery-row-trio { grid-template-columns: 1fr 1fr; }
       .inquiry-form { grid-template-columns: 1fr; }
       .coaching-features { flex-direction: column; gap: 16px; }
     }
     @media (max-width: 600px) {
       .hero-headline { letter-spacing: 0.1em; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .gallery-row-trio { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -623,6 +634,7 @@
     <div class="container">
       <div class="villa-grid">
         <div class="reveal">
+          <img class="villa-image" src="images/villa-zwembad.jpeg" alt="De villa met privézwembad en mediterrane tuinen" loading="lazy">
           <h3 class="feature-list-title">De Villa</h3>
           <ul class="feature-list">
             <li>Privézwembad met panoramisch uitzicht</li>
@@ -633,6 +645,7 @@
         </div>
         <div class="villa-divider"></div>
         <div class="reveal reveal-delay-1">
+          <img class="villa-image" src="images/padelcourts-overzicht.jpeg" alt="De privé-padelcourts onder de Spaanse zon" loading="lazy">
           <h3 class="feature-list-title">De Courts</h3>
           <ul class="feature-list">
             <li>Zes privé-padelcourts</li>
@@ -667,12 +680,23 @@
   <!-- ── Gallery ── -->
   <section id="galerij" class="section-neutral">
     <div class="container">
-      <div class="gallery-grid gallery-row-wide reveal" style="margin-bottom: clamp(12px, 2vw, 24px);">
-        <div class="gallery-placeholder gallery-wide">luchtfoto van het privécomplex bij zonsondergang</div>
+      <div class="gallery-grid gallery-row-duo reveal" style="margin-bottom: clamp(12px, 2vw, 24px);">
+        <img class="gallery-image gallery-portrait" src="images/villa-exterieur.jpeg" alt="De villa met palmen en bougainville onder de Spaanse zon" loading="lazy">
+        <img class="gallery-image gallery-portrait" src="images/padelcourt-detail.jpeg" alt="Detail van een padelcourt naast het mediterrane groen" loading="lazy">
       </div>
-      <div class="gallery-grid gallery-row-duo reveal reveal-delay-1">
+      <div class="gallery-grid gallery-row-trio reveal reveal-delay-1" style="margin-bottom: clamp(12px, 2vw, 24px);">
+        <img class="gallery-image gallery-tall" src="images/bougainville.jpeg" alt="Bloeiende bougainville langs de villa" loading="lazy">
+        <img class="gallery-image gallery-tall" src="images/jacaranda-golfbaan.jpeg" alt="Paarse jacaranda op de golfbaan van Campoamor" loading="lazy">
+        <img class="gallery-image gallery-tall" src="images/clubhouse-vergezicht.jpeg" alt="Vergezicht over de golfbaan met het clubhuis van Real Club Golf Campoamor" loading="lazy">
+      </div>
+      <div class="gallery-grid gallery-row-duo reveal reveal-delay-2" style="margin-bottom: clamp(12px, 2vw, 24px);">
         <img class="gallery-image gallery-portrait" src="images/terras-golfbaan.jpeg" alt="Uitzicht op de golfbaan en palmen vanaf het terras van de villa" loading="lazy">
         <img class="gallery-image gallery-portrait" src="images/terras-schemering.jpeg" alt="Het terras van de villa met loungestoelen in de schemering" loading="lazy">
+      </div>
+      <div class="gallery-grid gallery-row-trio reveal reveal-delay-3">
+        <img class="gallery-image gallery-tall" src="images/centro-deportivo-campoamor.jpeg" alt="Entree van het Centro Deportivo van Real Club Golf Campoamor" loading="lazy">
+        <img class="gallery-image gallery-tall" src="images/golfbaan-golfkar.jpeg" alt="Golfkar op de Campoamor golfbaan onder de Spaanse zon" loading="lazy">
+        <img class="gallery-image gallery-tall" src="images/padelbanen-palmen.jpeg" alt="Padelbanen omringd door palmen op het sportcomplex" loading="lazy">
       </div>
     </div>
   </section>
