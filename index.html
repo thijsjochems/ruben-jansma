@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Padel Escape — Luxe Padelreizen &amp; Trainingen</title>
+  <title>Padel Escape — Padel training in Nederland &amp; Padel trips naar Spanje</title>
+  <meta name="description" content="Padel Escape van Ruben Jansma: persoonlijke padeltraining in Nederland en luxe padel trips naar Zuid-Spanje. Voor beginners, gevorderden en competitiespelers. Ook kidslessen en bedrijfsclinics.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -65,6 +66,14 @@
       line-height: 1.3;
       max-width: 720px;
     }
+    .section-intro {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-top: clamp(24px, 3vw, 40px);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .section-dark .section-intro { color: rgba(245, 242, 235, 0.6); }
 
     /* ── Layout ── */
     .container {
@@ -77,6 +86,47 @@
     .section-dark .section-title { color: var(--text-light); }
     .section-light { background: var(--bg-light); color: var(--text-dark); }
     .section-neutral { background: var(--bg-neutral); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 40px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease, opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      color: var(--text-light);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary-dark {
+      color: var(--text-light);
+      border-color: rgba(245, 242, 235, 0.3);
+      background: transparent;
+    }
+    .btn-secondary-dark:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-secondary-light {
+      color: var(--text-dark);
+      border-color: rgba(26, 26, 26, 0.2);
+      background: transparent;
+    }
+    .btn-secondary-light:hover { background: var(--text-dark); border-color: var(--text-dark); color: var(--text-light); }
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: clamp(32px, 4vw, 48px);
+    }
+    .cta-group.centered { justify-content: center; }
 
     /* ── Navigation ── */
     nav {
@@ -94,12 +144,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 28px clamp(24px, 5vw, 64px);
+      padding: 20px clamp(24px, 5vw, 64px);
       max-width: 1400px;
       margin: 0 auto;
       transition: padding 0.4s ease;
+      gap: 24px;
     }
-    nav.scrolled .nav-inner { padding-top: 18px; padding-bottom: 18px; }
+    nav.scrolled .nav-inner { padding-top: 14px; padding-bottom: 14px; }
     .logo {
       font-family: var(--font-heading);
       font-weight: 300;
@@ -108,22 +159,40 @@
       text-transform: uppercase;
       color: var(--text-light);
       text-decoration: none;
+      white-space: nowrap;
     }
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 32px;
+      align-items: center;
     }
     .nav-links a {
       font-family: var(--font-heading);
       font-weight: 300;
-      font-size: 0.8125rem;
+      font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: rgba(245, 242, 235, 0.6);
       text-decoration: none;
       transition: color 0.3s ease;
+      white-space: nowrap;
     }
     .nav-links a:hover { color: var(--text-light); }
+    .nav-cta {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 12px 22px;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { opacity: 0.85; }
     .menu-toggle {
       display: none;
       flex-direction: column;
@@ -153,23 +222,25 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 40px;
+      gap: 32px;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
+      padding: 24px;
     }
     .mobile-menu.open { opacity: 1; pointer-events: all; }
-    .mobile-menu a {
+    .mobile-menu a:not(.btn) {
       font-family: var(--font-heading);
       font-weight: 200;
-      font-size: 1.5rem;
+      font-size: 1.375rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
       color: var(--text-light);
       text-decoration: none;
       transition: opacity 0.3s ease;
     }
-    .mobile-menu a:hover { opacity: 0.6; }
+    .mobile-menu a:not(.btn):hover { opacity: 0.6; }
+    .mobile-menu .btn { margin-top: 12px; }
 
     /* ── Hero ── */
     #hero {
@@ -198,40 +269,23 @@
     .hero-headline {
       font-family: var(--font-heading);
       font-weight: var(--heading-weight);
-      font-size: clamp(2rem, 4.4vw, 3.5rem);
+      font-size: clamp(1.75rem, 4vw, 3.25rem);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      line-height: 1.3;
+      line-height: 1.35;
       color: var(--text-light);
       margin-bottom: 2rem;
       text-align: center;
-      text-indent: 0.1em; /* compenseert trailing letter-spacing voor optisch centreren */
+      text-indent: 0.1em;
     }
     .hero-sub {
       font-family: var(--font-body);
       font-weight: 400;
       font-size: clamp(1rem, 1.5vw, 1.25rem);
-      color: rgba(245, 242, 235, 0.55);
+      color: rgba(245, 242, 235, 0.6);
       line-height: 1.8;
-      max-width: 580px;
-      margin: 0 auto 3rem;
-    }
-    .hero-cta {
-      display: inline-block;
-      font-family: var(--font-heading);
-      font-weight: 300;
-      font-size: 0.8125rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--text-light);
-      text-decoration: none;
-      border: 1px solid rgba(245, 242, 235, 0.3);
-      padding: 18px 48px;
-      transition: background 0.4s ease, border-color 0.4s ease;
-    }
-    .hero-cta:hover {
-      background: var(--accent);
-      border-color: var(--accent);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
     }
     .scroll-indicator {
       position: absolute;
@@ -248,8 +302,49 @@
       50% { opacity: 1; }
     }
 
-    /* ── Experience ── */
-    #ervaring { padding: clamp(80px, 12vw, 160px) 0; }
+    /* ── Training ── */
+    #training { padding: clamp(80px, 12vw, 160px) 0; }
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(32px, 3.5vw, 48px);
+      margin-top: clamp(48px, 6vw, 72px);
+    }
+    .training-item {
+      border-top: 1px solid rgba(245, 242, 235, 0.15);
+      padding-top: 20px;
+    }
+    .training-item-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.9375rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+    .training-item-desc {
+      font-size: 0.9375rem;
+      color: rgba(245, 242, 235, 0.55);
+      line-height: 1.75;
+    }
+    .training-meta {
+      margin-top: clamp(32px, 4vw, 48px);
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 235, 0.45);
+    }
+    .training-meta span + span::before {
+      content: '·';
+      margin: 0 12px;
+      color: var(--accent);
+    }
+
+    /* ── Trips ── */
+    #trips { padding: clamp(80px, 12vw, 160px) 0 clamp(60px, 8vw, 120px); }
     .pillars {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -270,14 +365,11 @@
       color: var(--text-muted);
       line-height: 1.9;
     }
-
-    /* ── Villa & Courts ── */
-    #villa { padding: 0 0 clamp(80px, 12vw, 160px); }
     .villa-grid {
       display: grid;
       grid-template-columns: 1fr 1px 1fr;
       gap: clamp(32px, 4vw, 64px);
-      margin-top: clamp(48px, 6vw, 80px);
+      margin-top: clamp(60px, 8vw, 100px);
     }
     .villa-divider { background: rgba(26, 26, 26, 0.1); }
     .feature-list {
@@ -307,28 +399,51 @@
       display: block;
       margin-bottom: clamp(24px, 4vw, 40px);
     }
-
-    /* ── Coaching ── */
-    #coaching { padding: clamp(80px, 12vw, 160px) 0; }
-    .coaching-body {
-      max-width: 640px;
-      margin-top: clamp(32px, 4vw, 48px);
-      color: rgba(245, 242, 235, 0.6);
+    .trips-program {
+      background: rgba(184, 90, 56, 0.05);
+      border-left: 2px solid var(--accent);
+      padding: clamp(24px, 3vw, 40px);
+      margin-top: clamp(60px, 8vw, 100px);
     }
-    .coaching-features {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px 32px;
-      margin-top: 3rem;
+    .trips-program-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+    .trips-program-text {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.85;
+    }
+
+    /* ── Kids ── */
+    #kids { padding: clamp(80px, 12vw, 160px) 0; }
+    .kids-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: center;
+      margin-top: clamp(48px, 6vw, 72px);
+    }
+    .kids-body p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .kids-meta {
+      margin-top: 24px;
       font-family: var(--font-heading);
       font-weight: 300;
       font-size: 0.8125rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(245, 242, 235, 0.35);
+      color: var(--text-muted);
     }
-    .coaching-features span { white-space: nowrap; }
-    .coaching-features span::before {
+    .kids-meta::before {
       content: '';
       display: inline-block;
       width: 6px;
@@ -338,35 +453,59 @@
       margin-right: 12px;
       vertical-align: middle;
     }
-
-    /* ── Gallery ── */
-    #galerij { padding: clamp(24px, 4vw, 48px) 0; }
-    .gallery-grid {
-      display: grid;
-      gap: clamp(12px, 2vw, 24px);
-    }
-    .gallery-row-wide { grid-template-columns: 1fr; }
-    .gallery-row-duo { grid-template-columns: 1fr 1fr; }
-    .gallery-row-trio { grid-template-columns: repeat(3, 1fr); }
-    .gallery-placeholder {
+    .kids-image {
       width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Over mij ── */
+    #over { padding: clamp(80px, 12vw, 160px) 0; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: clamp(48px, 6vw, 96px);
+      margin-top: clamp(48px, 6vw, 72px);
+      align-items: start;
+    }
+    .about-portrait {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+    .about-portrait-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      background: rgba(26, 26, 26, 0.06);
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #2a2a28;
-      background-image: repeating-linear-gradient(
-        -45deg, transparent, transparent 10px,
-        rgba(245, 242, 235, 0.025) 10px, rgba(245, 242, 235, 0.025) 20px
-      );
       font-family: 'Courier New', monospace;
       font-size: 0.75rem;
       letter-spacing: 0.1em;
-      color: rgba(245, 242, 235, 0.2);
+      color: rgba(26, 26, 26, 0.35);
       text-transform: uppercase;
       text-align: center;
       padding: 24px;
     }
-    .gallery-wide { aspect-ratio: 21/9; }
+    .about-body p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+    }
+    .about-body p:last-of-type { margin-bottom: 0; }
+
+    /* ── Gallery ── */
+    #galerij { padding: clamp(60px, 8vw, 100px) 0; }
+    .gallery-grid {
+      display: grid;
+      gap: clamp(12px, 2vw, 24px);
+    }
+    .gallery-row-duo { grid-template-columns: 1fr 1fr; }
+    .gallery-row-trio { grid-template-columns: repeat(3, 1fr); }
     .gallery-portrait { aspect-ratio: 4/5; }
     .gallery-tall { aspect-ratio: 3/4; }
     .gallery-image {
@@ -414,12 +553,10 @@
       border-radius: 0;
     }
     .form-input:focus { border-bottom-color: var(--accent); }
-    select.form-input {
-      cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238E8E93' stroke-width='1.5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 4px center;
-      padding-right: 24px;
+    textarea.form-input {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
     }
     .radio-group {
       display: flex;
@@ -468,13 +605,28 @@
       color: var(--text-light);
       background: var(--accent);
       border: 1px solid var(--accent);
-      padding: 18px 48px;
+      padding: 18px 40px;
       cursor: pointer;
       transition: background 0.4s ease, opacity 0.3s ease;
       margin-top: 8px;
       justify-self: start;
     }
     .submit-btn:hover { opacity: 0.85; }
+    .submit-btn:disabled { opacity: 0.6; cursor: wait; }
+    .form-fallback {
+      grid-column: 1 / -1;
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+    }
+    .form-fallback a {
+      color: var(--text-dark);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.2);
+      padding-bottom: 1px;
+      transition: border-color 0.3s ease;
+    }
+    .form-fallback a:hover { border-bottom-color: var(--accent); }
     .form-success {
       display: none;
       grid-column: 1 / -1;
@@ -550,21 +702,29 @@
     .reveal-delay-3 { transition-delay: 0.45s; }
 
     /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
+    @media (max-width: 1100px) {
+      .nav-links { gap: 24px; }
+    }
+    @media (max-width: 960px) {
+      .nav-links, .nav-cta { display: none; }
       .menu-toggle { display: flex; }
-      .pillars { grid-template-columns: 1fr; gap: 48px; }
+      .pillars { grid-template-columns: 1fr; gap: 40px; }
       .villa-grid { grid-template-columns: 1fr; gap: 48px; }
       .villa-divider { display: none; }
+      .training-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .kids-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; max-width: 640px; }
       .gallery-row-duo { grid-template-columns: 1fr; }
       .gallery-row-trio { grid-template-columns: 1fr 1fr; }
       .inquiry-form { grid-template-columns: 1fr; }
-      .coaching-features { flex-direction: column; gap: 16px; }
     }
     @media (max-width: 600px) {
-      .hero-headline { letter-spacing: 0.1em; }
-      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .hero-headline { letter-spacing: 0.08em; }
+      .training-grid { grid-template-columns: 1fr; }
       .gallery-row-trio { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .btn { padding: 16px 28px; font-size: 0.75rem; letter-spacing: 0.22em; }
+      .cta-group { gap: 12px; }
     }
   </style>
 </head>
@@ -575,11 +735,14 @@
     <div class="nav-inner">
       <a href="#hero" class="logo">Padel Escape</a>
       <div class="nav-links">
-        <a href="#ervaring">De Ervaring</a>
-        <a href="#villa">Villa &amp; Courts</a>
-        <a href="#coaching">Coaching</a>
-        <a href="#contact">Informeer</a>
+        <a href="#hero">Home</a>
+        <a href="#training">Padel Training</a>
+        <a href="#trips">Padel Trips</a>
+        <a href="#kids">Kidslessen</a>
+        <a href="#over">Over mij</a>
+        <a href="#contact">Contact</a>
       </div>
+      <a href="#contact" class="nav-cta">Boek een training</a>
       <button class="menu-toggle" aria-label="Menu">
         <span></span>
         <span></span>
@@ -589,49 +752,91 @@
 
   <!-- ── Mobile Menu ── -->
   <div class="mobile-menu">
-    <a href="#ervaring">De Ervaring</a>
-    <a href="#villa">Villa &amp; Courts</a>
-    <a href="#coaching">Coaching</a>
-    <a href="#contact">Informeer</a>
+    <a href="#hero">Home</a>
+    <a href="#training">Padel Training</a>
+    <a href="#trips">Padel Trips</a>
+    <a href="#kids">Kidslessen</a>
+    <a href="#over">Over mij</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-primary">Boek een training</a>
   </div>
 
   <!-- ── Hero ── -->
   <section id="hero" class="section-dark">
     <div class="hero-content">
-      <h1 class="hero-headline">De ultieme ontsnapping.<br>Geperfectioneerd padel.</h1>
-      <p class="hero-sub">Een sportieve week met op maat gemaakte Padel-training en mediterrane rust in je eigen besloten villa.</p>
-      <a href="#ervaring" class="hero-cta">Ontdek de ervaring</a>
+      <h1 class="hero-headline">Padel training in Nederland.<br>Padel trips naar Spanje.</h1>
+      <p class="hero-sub">Persoonlijke coaching en luxe padel trips van Ruben Jansma — voor spelers van elk niveau.</p>
+      <div class="cta-group centered">
+        <a href="#contact" class="btn btn-primary">Boek een training</a>
+        <a href="#trips" class="btn btn-secondary-dark">Bekijk padel trips</a>
+      </div>
     </div>
     <div class="scroll-indicator"></div>
   </section>
 
-  <!-- ── The Experience ── -->
-  <section id="ervaring" class="section-light">
+  <!-- ── Padel Training NL ── -->
+  <section id="training" class="section-dark">
     <div class="container">
       <div class="reveal">
-        <div class="label">De Ervaring</div>
-        <h2 class="section-title">Waar rust en meesterschap samenkomen</h2>
+        <div class="label">Padel Training</div>
+        <h2 class="section-title">Padel training in Nederland</h2>
+        <p class="section-intro">Of je nu net begint of op hoog niveau speelt, iedere training wordt volledig afgestemd op jouw niveau en doelen. We helpen spelers met techniek, tactiek en wedstrijdcoaching — individueel, in duo's of in kleine groepen.</p>
       </div>
-      <div class="pillars">
-        <div class="reveal reveal-delay-1">
-          <h3 class="pillar-title">Ontsnapping</h3>
-          <p class="pillar-text">Laat de dagelijkse drukte achter je. Een privévilla met zwembad, ommuurde tuinen en uitzicht op de Middellandse Zee vormt het decor voor jouw week van volledige afzondering en mediterrane rust.</p>
+      <div class="training-grid reveal reveal-delay-1">
+        <div class="training-item">
+          <h3 class="training-item-title">Privétraining</h3>
+          <p class="training-item-desc">1-op-1 coaching, volledig gericht op jouw techniek en spelinzicht.</p>
         </div>
-        <div class="reveal reveal-delay-2">
-          <h3 class="pillar-title">Intimiteit</h3>
-          <p class="pillar-text">Maximaal acht gasten per week. Geen drukte, geen wachtlijsten, geen compromissen. Zes privécourts en een eigen golfbaan staan uitsluitend tot je beschikking.</p>
+        <div class="training-item">
+          <h3 class="training-item-title">Duo-training</h3>
+          <p class="training-item-desc">Samen trainen met een vaste partner, persoonlijke feedback op beiden.</p>
         </div>
-        <div class="reveal reveal-delay-3">
-          <h3 class="pillar-title">Verfijning</h3>
-          <p class="pillar-text">Van op maat samengestelde maaltijden tot persoonlijke coaching — elk detail is doordacht ontworpen om aan de hoogste verwachtingen te voldoen.</p>
+        <div class="training-item">
+          <h3 class="training-item-title">Groepstraining</h3>
+          <p class="training-item-desc">Kleine groepen met veel speeltijd, ideaal om samen te groeien.</p>
         </div>
+        <div class="training-item">
+          <h3 class="training-item-title">Clinics voor bedrijven</h3>
+          <p class="training-item-desc">Een sportieve en gezellige teamervaring op de baan.</p>
+        </div>
+        <div class="training-item">
+          <h3 class="training-item-title">Competitiebegeleiding</h3>
+          <p class="training-item-desc">Wedstrijdcoaching en tactische voorbereiding voor competitiespelers.</p>
+        </div>
+      </div>
+      <div class="training-meta reveal reveal-delay-2">
+        <span>Tarieven op aanvraag</span>
+        <span>Proeflessen mogelijk</span>
+      </div>
+      <div class="cta-group reveal reveal-delay-3">
+        <a href="#contact" class="btn btn-primary">Boek direct</a>
+        <a href="#contact" class="btn btn-secondary-dark">Vraag proefles aan</a>
       </div>
     </div>
   </section>
 
-  <!-- ── Villa & Courts ── -->
-  <section id="villa" class="section-light">
+  <!-- ── Padel Trips ── -->
+  <section id="trips" class="section-light">
     <div class="container">
+      <div class="reveal">
+        <div class="label">Padel Trips</div>
+        <h2 class="section-title">Padel trips naar Zuid-Spanje</h2>
+        <p class="section-intro">Meer dan alleen vakantie. Tijdens onze padel trips combineer je intensieve trainingen, wedstrijden en ontspanning bij onze prachtige villa in Zuid-Spanje.</p>
+      </div>
+      <div class="pillars">
+        <div class="reveal reveal-delay-1">
+          <h3 class="pillar-title">Ontsnapping</h3>
+          <p class="pillar-text">Laat de dagelijkse drukte achter je. Een privévilla met zwembad, ommuurde tuinen en uitzicht op de golfbaan.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <h3 class="pillar-title">Intimiteit</h3>
+          <p class="pillar-text">Maximaal acht gasten per week. Zes privécourts en een eigen golfbaan tot je beschikking.</p>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <h3 class="pillar-title">Verfijning</h3>
+          <p class="pillar-text">Op maat samengestelde maaltijden en persoonlijke coaching van Nederlandse en Spaanse trainers.</p>
+        </div>
+      </div>
       <div class="villa-grid">
         <div class="reveal">
           <img class="villa-image" src="images/villa-zwembad.jpeg" alt="De villa met privézwembad en mediterrane tuinen" loading="lazy">
@@ -655,24 +860,59 @@
           </ul>
         </div>
       </div>
+      <div class="trips-program reveal">
+        <h3 class="trips-program-title">Hoe ziet een week eruit?</h3>
+        <p class="trips-program-text">Elke week combineert dagelijkse trainingen op de privécourts met vrije tijd bij het zwembad, wedstrijdvormen, gezamenlijke maaltijden en tijd om Zuid-Spanje te ontdekken. Aankomst op zondag, vertrek op vrijdag — een compleet programma daartussen.</p>
+      </div>
+      <div class="cta-group reveal">
+        <a href="#contact" class="btn btn-primary">Neem contact op</a>
+        <a href="#galerij" class="btn btn-secondary-light">Bekijk foto's</a>
+      </div>
     </div>
   </section>
 
-  <!-- ── Coaching ── -->
-  <section id="coaching" class="section-dark">
+  <!-- ── Kidslessen ── -->
+  <section id="kids" class="section-neutral">
     <div class="container">
       <div class="reveal">
-        <div class="label">Coaching</div>
-        <h2 class="section-title">Op maat gemaakt meesterschap</h2>
+        <div class="label">Kidslessen</div>
+        <h2 class="section-title">Spelenderwijs beter worden</h2>
       </div>
-      <div class="coaching-body reveal reveal-delay-1">
-        <p>Spaanse en Nederlandse coaches — elk met een achtergrond op professioneel niveau — creëren een volledig gepersonaliseerd trainingsprogramma dat aansluit bij jouw ambitie en speelstijl. Van technische verfijning en tactische strategie tot mentale weerbaarheid: elke sessie is ontworpen om je spel naar een hoger niveau te tillen.</p>
+      <div class="kids-grid">
+        <div class="kids-body reveal reveal-delay-1">
+          <p>Padel is een sport waarin kinderen spelenderwijs techniek, coördinatie en samenwerking ontwikkelen. Tijdens de kidslessen staat plezier centraal, terwijl kinderen tegelijkertijd groeien als speler.</p>
+          <div class="kids-meta">Proeflessen mogelijk</div>
+          <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">Boek proefles</a>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <img class="kids-image" src="images/padelbanen-palmen.jpeg" alt="Padelbanen tussen de palmen — sfeer voor de kidslessen" loading="lazy">
+        </div>
       </div>
-      <div class="coaching-features reveal reveal-delay-2">
-        <span>Persoonlijke videoanalyse</span>
-        <span>Strategische spelsessies</span>
-        <span>Fysieke conditioning</span>
-        <span>Mentale coaching</span>
+    </div>
+  </section>
+
+  <!-- ── Over mij ── -->
+  <section id="over" class="section-light">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Over mij</div>
+        <h2 class="section-title">Ruben Jansma</h2>
+      </div>
+      <div class="about-grid">
+        <div class="reveal reveal-delay-1">
+          <div class="about-portrait-placeholder">Portret van Ruben<br>(foto volgt)</div>
+        </div>
+        <div class="about-body reveal reveal-delay-2">
+          <p>Mijn naam is Ruben Jansma en sport heeft eigenlijk altijd een grote rol gespeeld in mijn leven. Van jongs af aan ben ik bezig geweest met verschillende balsporten, maar mijn eerste kennismaking met padel was tijdens een verblijf in Spanje. Daar sloeg de vonk direct over.</p>
+          <p>Wat begon als nieuwsgierigheid groeide al snel uit tot een echte passie. In de afgelopen jaren is mijn enthousiasme voor de sport alleen maar groter geworden. Ik ben mezelf steeds verder gaan ontwikkelen, ben trainingen gaan volgen en uiteindelijk ook zelf training gaan geven.</p>
+          <p>Inmiddels speel ik al ruim 10 jaar padel en geef ik inmiddels 4 jaar met veel plezier training aan spelers van verschillende niveaus. Het mooiste aan lesgeven vind ik om mensen te helpen beter te worden, maar vooral om het plezier en enthousiasme voor de sport over te brengen.</p>
+          <p>Met de trainingen en trips wil ik die passie combineren met alles wat padel zo bijzonder maakt: sport, gezelligheid, ontwikkeling en de unieke Spaanse padelcultuur waar het voor mij allemaal begon. Of je nu naar Spanje komt voor een padelreis of op de baan staat voor een training, het doel is altijd hetzelfde: genieten van het spel en samen een mooie ervaring creëren.</p>
+          <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">Neem contact op</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -701,58 +941,71 @@
     </div>
   </section>
 
-  <!-- ── Inquiry Form ── -->
+  <!-- ── Contact ── -->
   <section id="contact" class="section-light">
     <div class="container">
       <div class="reveal">
-        <div class="label">Informeer</div>
-        <h2 class="section-title">Begin je reis</h2>
-        <p class="form-intro">Vul het onderstaande formulier in en we nemen persoonlijk contact met je op om je verblijf samen te stellen.</p>
+        <div class="label">Contact</div>
+        <h2 class="section-title">Neem contact op</h2>
+        <p class="form-intro">Laat je gegevens achter, dan neem ik persoonlijk contact met je op — voor training, trip, kidsles of clinic.</p>
       </div>
-      <form class="inquiry-form reveal reveal-delay-1" onsubmit="handleSubmit(event)">
+      <form class="inquiry-form reveal reveal-delay-1" action="https://formsubmit.co/ajax/info@padelescape.nl" method="POST" onsubmit="handleSubmit(event)">
+        <input type="hidden" name="_subject" value="Nieuwe aanvraag via padelescape.nl">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+
         <div class="form-group">
           <label class="form-label" for="name">Naam</label>
-          <input class="form-input" type="text" id="name" name="name" required autocomplete="name">
+          <input class="form-input" type="text" id="name" name="Naam" required autocomplete="name">
         </div>
         <div class="form-group">
           <label class="form-label" for="email">E-mail</label>
-          <input class="form-input" type="email" id="email" name="email" required autocomplete="email">
+          <input class="form-input" type="email" id="email" name="E-mail" required autocomplete="email">
         </div>
         <div class="form-group">
-          <label class="form-label" for="group-size">Groepsgrootte</label>
-          <select class="form-input" id="group-size" name="group-size" required>
-            <option value="" disabled selected>Selecteer</option>
-            <option value="2">2 personen</option>
-            <option value="4">4 personen</option>
-            <option value="6">6 personen</option>
-            <option value="8">8 personen</option>
-          </select>
+          <label class="form-label" for="phone">Telefoon (optioneel)</label>
+          <input class="form-input" type="tel" id="phone" name="Telefoon" autocomplete="tel">
         </div>
         <div class="form-group">
-          <label class="form-label">Jouw ambitie</label>
+          <label class="form-label">Waar ben je in geïnteresseerd?</label>
           <div class="radio-group">
             <label class="radio-option">
-              <input type="radio" name="goal" value="relaxation" required>
+              <input type="radio" name="Interesse" value="Padel training in Nederland" required>
               <span class="radio-dot"></span>
-              <span class="radio-label">Ontspanning &amp; plezier</span>
+              <span class="radio-label">Padel training in Nederland</span>
             </label>
             <label class="radio-option">
-              <input type="radio" name="goal" value="improvement">
+              <input type="radio" name="Interesse" value="Padel trip naar Spanje">
               <span class="radio-dot"></span>
-              <span class="radio-label">Intensieve verbetering</span>
+              <span class="radio-label">Padel trip naar Spanje</span>
             </label>
             <label class="radio-option">
-              <input type="radio" name="goal" value="both">
+              <input type="radio" name="Interesse" value="Kidsles">
               <span class="radio-dot"></span>
-              <span class="radio-label">Een combinatie van beide</span>
+              <span class="radio-label">Kidsles</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Interesse" value="Bedrijfsclinic">
+              <span class="radio-dot"></span>
+              <span class="radio-label">Bedrijfsclinic</span>
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="Interesse" value="Anders / algemene vraag">
+              <span class="radio-dot"></span>
+              <span class="radio-label">Anders / algemene vraag</span>
             </label>
           </div>
         </div>
         <div class="form-group full-width">
-          <button type="submit" class="submit-btn">Ontdek de beschikbaarheid</button>
+          <label class="form-label" for="message">Bericht</label>
+          <textarea class="form-input" id="message" name="Bericht" required></textarea>
         </div>
+        <div class="form-group full-width">
+          <button type="submit" class="submit-btn">Verstuur aanvraag</button>
+        </div>
+        <div class="form-fallback">Liever direct mailen? <a href="mailto:info@padelescape.nl">info@padelescape.nl</a></div>
         <div class="form-success" id="form-success">
-          Bedankt voor je interesse. We nemen spoedig contact met je op.
+          Bedankt voor je aanvraag. Ik neem spoedig persoonlijk contact met je op.
         </div>
       </form>
     </div>
@@ -764,7 +1017,7 @@
       <div class="footer-top">
         <div class="footer-about">
           <div class="footer-brand">Padel Escape</div>
-          <p class="footer-tagline">Luxe padelreizen naar Spanje &amp; professionele trainingen in Nederland.</p>
+          <p class="footer-tagline">Padel training in Nederland &amp; luxe padel trips naar Zuid-Spanje.</p>
         </div>
         <div class="footer-contact">
           <a href="mailto:info@padelescape.nl">info@padelescape.nl</a>
@@ -779,22 +1032,7 @@
     </div>
   </footer>
 
-  <!-- ── Tweaks ── -->
-  <div id="tweaks-root"></div>
-
   <script>
-    /* ── Tweak defaults ── */
-    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-      "accentColor": "#B85A38",
-      "headingWeight": "200"
-    }/*EDITMODE-END*/;
-
-    function applyTweaks(t) {
-      document.documentElement.style.setProperty('--accent', t.accentColor);
-      document.documentElement.style.setProperty('--heading-weight', t.headingWeight);
-    }
-    applyTweaks(TWEAK_DEFAULTS);
-
     /* ── Nav scroll ── */
     const navEl = document.querySelector('nav');
     window.addEventListener('scroll', () => {
@@ -821,54 +1059,29 @@
     }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    /* ── Form ── */
-    function handleSubmit(e) {
+    /* ── Form: async submit via FormSubmit ── */
+    async function handleSubmit(e) {
       e.preventDefault();
       const form = e.target;
-      const fields = form.querySelectorAll('.form-group:not(.full-width)');
       const btn = form.querySelector('.submit-btn');
-      fields.forEach(f => f.style.display = 'none');
-      btn.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Bezig met verzenden…';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!response.ok) throw new Error('Network error');
+        form.querySelectorAll('.form-group, .form-fallback').forEach(el => el.style.display = 'none');
+        document.getElementById('form-success').style.display = 'block';
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        alert('Er ging iets mis met het verzenden. Stuur je bericht liever direct naar info@padelescape.nl');
+      }
     }
-  </script>
-
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-  <script type="text/babel" src="tweaks-panel.jsx"></script>
-  <script type="text/babel">
-    const { useTweaks, TweaksPanel, TweakSection, TweakColor, TweakRadio } = window;
-
-    function App() {
-      const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
-
-      React.useEffect(() => { applyTweaks(t); }, [t.accentColor, t.headingWeight]);
-
-      return (
-        <TweaksPanel>
-          <TweakSection label="Merk">
-            <TweakColor
-              label="Accentkleur"
-              value={t.accentColor}
-              options={['#B85A38', '#B8923A', '#6B7D5A']}
-              onChange={v => setTweak('accentColor', v)}
-            />
-            <TweakRadio
-              label="Koppen"
-              value={t.headingWeight}
-              options={[
-                { label: 'Licht', value: '200' },
-                { label: 'Medium', value: '300' }
-              ]}
-              onChange={v => setTweak('headingWeight', v)}
-            />
-          </TweakSection>
-        </TweaksPanel>
-      );
-    }
-
-    ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<App />);
   </script>
 
 </body>
