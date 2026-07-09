@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voorstel — Padel Escape (nieuwe versie)</title>
+  <meta name="description" content="Voorstel-versie van de Padel Escape site met verbeteringen. Niet-indexeerbaar.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1A1A1A">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #1A1A1A;
+      --bg-light: #F5F2EB;
+      --bg-neutral: #E8E4DC;
+      --accent: #B85A38;
+      --text-dark: #1A1A1A;
+      --text-light: #F5F2EB;
+      --text-muted: #6E6E73;
+      --heading-weight: 200;
+      --font-heading: 'Outfit', system-ui, sans-serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+      --preview-bar-height: 34px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      background: var(--bg-light);
+      line-height: 1.8;
+      font-size: 1.125rem;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-wrap: pretty;
+      overflow-x: hidden;
+    }
+    ::selection { background: var(--accent); color: var(--text-light); }
+    :focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* Skip to content voor toetsenbord/screenreader */
+    .skip-link {
+      position: absolute;
+      left: 12px;
+      top: -60px;
+      background: var(--accent);
+      color: var(--text-light);
+      padding: 10px 20px;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      z-index: 300;
+      transition: top 0.2s ease;
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* Preview bandje bovenaan */
+    .preview-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: var(--preview-bar-height);
+      background: var(--accent);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-family: var(--font-heading);
+      font-size: 0.6875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0 16px;
+    }
+    .preview-bar a {
+      color: var(--text-light);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(245, 242, 235, 0.5);
+      padding-bottom: 1px;
+    }
+    .preview-bar a:hover { border-bottom-color: var(--text-light); }
+    @media (max-width: 500px) { .preview-bar { font-size: 0.625rem; letter-spacing: 0.12em; } }
+
+    /* Placeholder markers */
+    .placeholder-note {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-weight: 400;
+      font-size: 0.625rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(184, 90, 56, 0.1);
+      border: 1px dashed rgba(184, 90, 56, 0.5);
+      padding: 3px 8px;
+      margin-left: 10px;
+      border-radius: 2px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    .placeholder-callout {
+      border-left: 3px dashed rgba(184, 90, 56, 0.6);
+      background: rgba(184, 90, 56, 0.05);
+      padding: 16px 20px;
+      margin-top: 24px;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+    .section-dark .placeholder-callout {
+      background: rgba(184, 90, 56, 0.12);
+      color: rgba(245, 242, 235, 0.85);
+    }
+    .placeholder-callout strong {
+      color: var(--accent);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* Typography */
+    .label {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .label::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-weight: var(--heading-weight);
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.3;
+      max-width: 720px;
+    }
+    .section-intro {
+      color: var(--text-muted);
+      max-width: 640px;
+      margin-top: clamp(24px, 3vw, 40px);
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+    .section-dark .section-intro { color: rgba(245, 242, 235, 0.7); }
+
+    /* Layout */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 64px);
+    }
+    .section-dark { background: var(--bg-dark); color: var(--text-light); }
+    .section-dark .label { color: rgba(245, 242, 235, 0.5); }
+    .section-dark .section-title { color: var(--text-light); }
+    .section-light { background: var(--bg-light); color: var(--text-dark); }
+    .section-neutral { background: var(--bg-neutral); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 18px 40px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease, opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .btn-primary { color: var(--text-light); background: var(--accent); border-color: var(--accent); }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary-dark { color: var(--text-light); border-color: rgba(245, 242, 235, 0.3); background: transparent; }
+    .btn-secondary-dark:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-secondary-light { color: var(--text-dark); border-color: rgba(26, 26, 26, 0.2); background: transparent; }
+    .btn-secondary-light:hover { background: var(--text-dark); border-color: var(--text-dark); color: var(--text-light); }
+    .cta-group { display: flex; gap: 16px; flex-wrap: wrap; margin-top: clamp(32px, 4vw, 48px); }
+    .cta-group.centered { justify-content: center; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: var(--preview-bar-height); left: 0; right: 0;
+      z-index: 100;
+      transition: background 0.5s ease, backdrop-filter 0.5s ease;
+    }
+    nav.scrolled {
+      background: rgba(26, 26, 26, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px clamp(24px, 5vw, 64px);
+      max-width: 1400px;
+      margin: 0 auto;
+      transition: padding 0.4s ease;
+      gap: 24px;
+    }
+    nav.scrolled .nav-inner { padding-top: 14px; padding-bottom: 14px; }
+    .logo {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.9375rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      position: relative;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 235, 0.6);
+      text-decoration: none;
+      transition: color 0.3s ease;
+      white-space: nowrap;
+      padding-bottom: 4px;
+    }
+    .nav-links a:hover { color: var(--text-light); }
+    .nav-links a.active { color: var(--text-light); }
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: var(--accent);
+    }
+    .nav-cta {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 12px 22px;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+    .menu-toggle span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--text-light);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .menu-toggle.open span:first-child { transform: rotate(45deg) translate(2.5px, 2.5px); }
+    .menu-toggle.open span:last-child { transform: rotate(-45deg) translate(2.5px, -2.5px); }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      inset: var(--preview-bar-height) 0 0 0;
+      z-index: 99;
+      background: var(--bg-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 24px;
+    }
+    .mobile-menu.open { opacity: 1; pointer-events: all; }
+    .mobile-menu a:not(.btn) {
+      font-family: var(--font-heading);
+      font-weight: 200;
+      font-size: 1.375rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu a:not(.btn):hover { opacity: 0.6; }
+    .mobile-menu .btn { margin-top: 12px; }
+
+    /* Hero — split layout met portret Ruben */
+    #hero {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: calc(var(--preview-bar-height) + 80px) 0 80px;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 30%, rgba(184, 90, 56, 0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-split {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 clamp(24px, 5vw, 64px);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: center;
+    }
+    .hero-text .label {
+      color: rgba(245, 242, 235, 0.5);
+    }
+    .hero-headline {
+      font-family: var(--font-heading);
+      font-weight: var(--heading-weight);
+      font-size: clamp(2rem, 4.4vw, 3.5rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.25;
+      color: var(--text-light);
+      margin-bottom: 1.75rem;
+    }
+    .hero-sub {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      color: rgba(245, 242, 235, 0.7);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 0 2.5rem;
+    }
+    .hero-image-wrap {
+      position: relative;
+    }
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -8px -8px 8px 8px;
+      border: 1px solid rgba(184, 90, 56, 0.4);
+      z-index: 0;
+    }
+    .hero-image {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, rgba(245, 242, 235, 0.25));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Training */
+    #training { padding: clamp(80px, 12vw, 160px) 0; }
+    .training-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(32px, 3.5vw, 48px);
+      margin-top: clamp(48px, 6vw, 72px);
+    }
+    .training-item {
+      border-top: 1px solid rgba(245, 242, 235, 0.15);
+      padding-top: 20px;
+    }
+    .training-item-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.9375rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+    .training-item-desc {
+      font-size: 0.9375rem;
+      color: rgba(245, 242, 235, 0.65);
+      line-height: 1.75;
+    }
+    .training-item-price {
+      display: block;
+      margin-top: 12px;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+    .training-meta {
+      margin-top: clamp(32px, 4vw, 48px);
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 235, 0.55);
+    }
+    .training-meta span + span::before { content: '·'; margin: 0 12px; color: var(--accent); }
+    .training-locations {
+      margin-top: 14px;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 235, 0.45);
+    }
+    .training-locations::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: rgba(245, 242, 235, 0.3);
+      margin-right: 14px;
+      vertical-align: middle;
+    }
+
+    /* Trips */
+    #trips { padding: clamp(80px, 12vw, 160px) 0 clamp(60px, 8vw, 120px); }
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(32px, 4vw, 64px);
+      margin-top: clamp(48px, 6vw, 80px);
+    }
+    .pillar-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+      color: var(--text-dark);
+    }
+    .pillar-text { font-size: 1rem; color: var(--text-muted); line-height: 1.9; }
+    .villa-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: clamp(32px, 4vw, 64px);
+      margin-top: clamp(60px, 8vw, 100px);
+    }
+    .villa-divider { background: rgba(26, 26, 26, 0.1); }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .feature-list li { font-size: 1rem; color: var(--text-muted); }
+    .feature-list-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      color: var(--text-dark);
+    }
+    .villa-image {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      margin-bottom: clamp(24px, 4vw, 40px);
+    }
+    .trips-program {
+      background: rgba(184, 90, 56, 0.05);
+      border-left: 2px solid var(--accent);
+      padding: clamp(24px, 3vw, 40px);
+      margin-top: clamp(60px, 8vw, 100px);
+    }
+    .trips-program-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--text-dark);
+    }
+    .trips-program-text { font-size: 1rem; color: var(--text-muted); line-height: 1.85; }
+
+    /* Kids */
+    #kids { padding: clamp(80px, 12vw, 160px) 0; }
+    .kids-body { max-width: 720px; margin-top: clamp(32px, 4vw, 48px); }
+    .kids-body p { color: var(--text-muted); font-size: 1rem; line-height: 1.9; }
+    .kids-meta {
+      margin-top: 24px;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .kids-meta::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+
+    /* Over mij */
+    #over { padding: clamp(80px, 12vw, 160px) 0; }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: clamp(48px, 6vw, 96px);
+      margin-top: clamp(48px, 6vw, 72px);
+      align-items: start;
+    }
+    .about-portrait {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+    }
+    .about-quote {
+      font-family: var(--font-heading);
+      font-weight: 200;
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+      color: var(--text-dark);
+      margin-bottom: 2rem;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--accent);
+      font-style: italic;
+    }
+    .about-body p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+    }
+    .about-body p:last-of-type { margin-bottom: 0; }
+
+    /* Reviews */
+    #reviews { padding: clamp(80px, 12vw, 160px) 0; }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(24px, 3vw, 40px);
+      margin-top: clamp(48px, 6vw, 72px);
+    }
+    .review-card {
+      background: rgba(184, 90, 56, 0.03);
+      padding: clamp(24px, 3vw, 36px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .review-quote {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+    .review-author {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Gallery */
+    #galerij { padding: clamp(60px, 8vw, 100px) 0; }
+    .gallery-heading {
+      margin-bottom: clamp(32px, 4vw, 48px);
+    }
+    .gallery-grid { display: grid; gap: clamp(12px, 2vw, 24px); }
+    .gallery-row-duo { grid-template-columns: 1fr 1fr; }
+    .gallery-row-trio { grid-template-columns: repeat(3, 1fr); }
+    .gallery-portrait { aspect-ratio: 4/5; }
+    .gallery-tall { aspect-ratio: 3/4; }
+    .gallery-image { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Contact */
+    #contact { padding: clamp(80px, 12vw, 160px) 0; }
+    .form-intro {
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-top: 1.5rem;
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: clamp(48px, 6vw, 96px);
+      align-items: start;
+    }
+    .inquiry-form { display: flex; flex-direction: column; gap: 32px; max-width: 560px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .form-input {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--text-dark);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(26, 26, 26, 0.15);
+      padding: 12px 0;
+      outline: none;
+      transition: border-color 0.3s ease;
+      appearance: none;
+      border-radius: 0;
+    }
+    .form-input:focus { border-bottom-color: var(--accent); }
+    select.form-input {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236E6E73' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 4px center;
+      padding-right: 24px;
+    }
+    textarea.form-input {
+      min-height: 120px;
+      resize: vertical;
+      line-height: 1.6;
+    }
+    .form-privacy {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .form-privacy a { color: var(--text-dark); text-decoration: none; border-bottom: 1px solid rgba(26, 26, 26, 0.2); padding-bottom: 1px; }
+    .form-privacy a:hover { border-bottom-color: var(--accent); }
+    .submit-btn {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 18px 40px;
+      cursor: pointer;
+      transition: background 0.4s ease, opacity 0.3s ease;
+      align-self: flex-start;
+    }
+    .submit-btn:hover { opacity: 0.85; }
+    .submit-btn:disabled { opacity: 0.6; cursor: wait; }
+    .form-success {
+      display: none;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 1.125rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dark);
+    }
+
+    .contact-alternatives {
+      padding: clamp(24px, 3vw, 40px);
+      background: var(--bg-neutral);
+      border-left: 2px solid var(--accent);
+    }
+    .contact-alternatives-title {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.875rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .contact-alternatives-sub {
+      font-size: 0.9375rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .contact-alt-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-alt-list a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .contact-alt-list a:hover { background: var(--text-dark); color: var(--text-light); }
+    .contact-alt-icon {
+      display: inline-flex;
+      width: 20px;
+      height: 20px;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .contact-alt-list a:hover .contact-alt-icon { color: var(--text-light); }
+
+    /* Voor Ruben-sectie */
+    #for-ruben { padding: clamp(60px, 8vw, 100px) 0; }
+    .for-ruben-box {
+      background: var(--bg-light);
+      border: 1px dashed rgba(184, 90, 56, 0.5);
+      padding: clamp(28px, 4vw, 48px);
+    }
+    .for-ruben-box h2 {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: clamp(1.25rem, 2vw, 1.5rem);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .for-ruben-box p.intro {
+      color: var(--text-muted);
+      font-size: 0.9375rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .for-ruben-list {
+      list-style: none;
+      counter-reset: rlist;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .for-ruben-list li {
+      counter-increment: rlist;
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 16px;
+      align-items: baseline;
+    }
+    .for-ruben-list li::before {
+      content: counter(rlist, decimal-leading-zero);
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+    }
+    .for-ruben-list li strong { color: var(--text-dark); font-weight: 500; }
+    .for-ruben-list li span { color: var(--text-muted); font-size: 0.9375rem; line-height: 1.7; display: block; }
+
+    /* Footer */
+    footer { padding: clamp(56px, 8vw, 88px) 0 40px; }
+    .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .footer-brand {
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.8125rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245, 242, 235, 0.7);
+      margin-bottom: 1rem;
+    }
+    .footer-tagline {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: rgba(245, 242, 235, 0.5);
+      max-width: 360px;
+      line-height: 1.7;
+    }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      color: rgba(245, 242, 235, 0.6);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover { color: var(--text-light); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: clamp(40px, 6vw, 64px);
+      padding-top: 28px;
+      border-top: 1px solid rgba(245, 242, 235, 0.1);
+    }
+    .footer-location, .footer-copy, .footer-legal a {
+      font-family: var(--font-body);
+      font-size: 0.8125rem;
+      color: rgba(245, 242, 235, 0.35);
+      text-decoration: none;
+    }
+    .footer-legal a:hover { color: var(--text-light); }
+    .footer-legal { display: flex; gap: 20px; }
+
+    /* Reveal Animation */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal, .reveal.visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .scroll-indicator, .about-portrait, * {
+        animation: none !important;
+      }
+      * { transition-duration: 0.01ms !important; }
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) { .nav-links { gap: 24px; } }
+    @media (max-width: 960px) {
+      .nav-links, .nav-cta { display: none; }
+      .menu-toggle { display: flex; }
+      .hero-split { grid-template-columns: 1fr; text-align: center; }
+      .hero-text { order: 2; }
+      .hero-image-wrap { order: 1; max-width: 320px; margin: 0 auto; }
+      .hero-headline { text-align: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .cta-group { justify-content: center; }
+      .hero-text .label { justify-content: center; }
+      .pillars { grid-template-columns: 1fr; gap: 40px; }
+      .villa-grid { grid-template-columns: 1fr; gap: 48px; }
+      .villa-divider { display: none; }
+      .training-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; max-width: 640px; }
+      .gallery-row-duo { grid-template-columns: 1fr; }
+      .gallery-row-trio { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+    @media (max-width: 600px) {
+      .training-grid { grid-template-columns: 1fr; }
+      .gallery-row-trio { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .btn { padding: 16px 26px; font-size: 0.75rem; letter-spacing: 0.22em; }
+      .cta-group { gap: 12px; }
+      .about-quote { padding-left: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#hero" class="skip-link">Direct naar inhoud</a>
+
+  <!-- Preview bandje -->
+  <div class="preview-bar">
+    <span>Voorstel-versie</span>
+    <a href="/">→ Bekijk huidige site</a>
+  </div>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#hero" class="logo">Padel Escape</a>
+      <div class="nav-links">
+        <a href="#training">Padel Training</a>
+        <a href="#trips">Padel Trips</a>
+        <a href="#kids">Kidslessen</a>
+        <a href="#over">Over mij</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <a href="#contact" class="nav-cta">Plan een training</a>
+      <button class="menu-toggle" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#training">Padel Training</a>
+    <a href="#trips">Padel Trips</a>
+    <a href="#kids">Kidslessen</a>
+    <a href="#over">Over mij</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-primary">Plan een training</a>
+  </div>
+
+  <!-- Hero — split layout -->
+  <section id="hero" class="section-dark">
+    <div class="hero-split">
+      <div class="hero-text">
+        <div class="label">Padel Escape · Ruben Jansma</div>
+        <h1 class="hero-headline">Sneller beter worden.<br>Meer plezier op de baan.</h1>
+        <p class="hero-sub">Persoonlijke padeltraining in Doorn, Maarn, Zeist en Houten. En luxe padel trips naar Zuid-Spanje. Voor spelers van elk niveau.</p>
+        <div class="cta-group">
+          <a href="#contact" class="btn btn-primary">Plan een kennismaking</a>
+          <a href="#trips" class="btn btn-secondary-dark">Bekijk padel trips</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <img src="/images/ruben-jansma.jpeg" alt="Ruben Jansma tijdens een padeltraining op de baan" class="hero-image">
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true"></div>
+  </section>
+
+  <!-- Padel Training NL -->
+  <section id="training" class="section-dark">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Padel Training</div>
+        <h2 class="section-title">Padel training in Nederland</h2>
+        <p class="section-intro">Of je nu net begint of op hoog niveau speelt, iedere training stem ik af op jouw niveau en doelen. Ik train spelers op techniek, tactiek en wedstrijdcoaching — individueel, in duo's of in kleine groepen.</p>
+      </div>
+
+      <div class="training-grid reveal reveal-delay-1">
+        <div class="training-item">
+          <h3 class="training-item-title">Privétraining</h3>
+          <p class="training-item-desc">1-op-1 coaching, volledig gericht op jouw techniek en spelinzicht.</p>
+          <span class="training-item-price">vanaf €75 / uur <span class="placeholder-note">Voorbeeld — Ruben checkt</span></span>
+        </div>
+        <div class="training-item">
+          <h3 class="training-item-title">Duo-training</h3>
+          <p class="training-item-desc">Samen trainen met een vaste partner, persoonlijke feedback op beiden.</p>
+          <span class="training-item-price">vanaf €50 p.p. / uur <span class="placeholder-note">Voorbeeld</span></span>
+        </div>
+        <div class="training-item">
+          <h3 class="training-item-title">Groepstraining</h3>
+          <p class="training-item-desc">Kleine groepen met veel speeltijd, ideaal om samen te groeien.</p>
+          <span class="training-item-price">vanaf €30 p.p. / uur <span class="placeholder-note">Voorbeeld</span></span>
+        </div>
+        <div class="training-item">
+          <h3 class="training-item-title">Bedrijfsclinics</h3>
+          <p class="training-item-desc">Een sportieve en gezellige teamervaring op de baan.</p>
+          <span class="training-item-price">vanaf €395 / clinic <span class="placeholder-note">Voorbeeld</span></span>
+        </div>
+        <div class="training-item">
+          <h3 class="training-item-title">Competitiebegeleiding</h3>
+          <p class="training-item-desc">Wedstrijdcoaching en tactische voorbereiding voor competitiespelers.</p>
+          <span class="training-item-price">Op aanvraag</span>
+        </div>
+      </div>
+
+      <div class="training-meta reveal reveal-delay-2">
+        <span>Proeflessen mogelijk</span>
+      </div>
+      <div class="training-locations reveal reveal-delay-2">Regio Doorn · Maarn · Zeist · Houten</div>
+
+      <div class="placeholder-callout reveal reveal-delay-3">
+        <strong>Ruben — vul in:</strong> op welke padelclub(s) geef je les? Of kom je op locatie? Voorbeeld: <em>"Ik train bij Padel Doorn en op verzoek op andere banen in de regio."</em> Dit is voor bezoekers de eerste vraag.
+      </div>
+
+      <div class="cta-group reveal reveal-delay-3">
+        <a href="#contact" class="btn btn-primary">Plan een training</a>
+        <a href="#contact" class="btn btn-secondary-dark">Vraag proefles aan</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Padel Trips -->
+  <section id="trips" class="section-light">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Padel Trips</div>
+        <h2 class="section-title">Padel trips naar Zuid-Spanje</h2>
+        <p class="section-intro">Trainen tussen de palmen, eten bij het zwembad, en 's avonds ontspannen aan de golfbaan. Tijdens een padel trip combineer je intensieve trainingen, wedstrijden en rust in een privévilla in Zuid-Spanje.</p>
+      </div>
+
+      <div class="pillars">
+        <div class="reveal reveal-delay-1">
+          <h3 class="pillar-title">Rust</h3>
+          <p class="pillar-text">Laat de drukte thuis. Een privévilla met zwembad, ommuurde tuinen en uitzicht op de golfbaan van Campoamor.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <h3 class="pillar-title">Kleinschalig</h3>
+          <p class="pillar-text">Maximaal acht gasten per week. Zes privécourts in de buurt van de villa, geen wachtlijsten.</p>
+        </div>
+        <div class="reveal reveal-delay-3">
+          <h3 class="pillar-title">Persoonlijk</h3>
+          <p class="pillar-text">Op maat samengestelde trainingen, samen met lokale Spaanse coaches. Ik ken elke deelnemer bij naam.</p>
+        </div>
+      </div>
+
+      <div class="villa-grid">
+        <div class="reveal">
+          <img class="villa-image" src="/images/villa-zwembad.jpeg" alt="De villa met privézwembad en mediterrane tuinen" loading="lazy">
+          <h3 class="feature-list-title">De Villa</h3>
+          <ul class="feature-list">
+            <li>Privézwembad met terras</li>
+            <li>Mediterrane ommuurde tuinen</li>
+            <li>Ruime slaapkamers met eigen terras</li>
+            <li>Ontbijt en diner op locatie</li>
+          </ul>
+        </div>
+        <div class="villa-divider"></div>
+        <div class="reveal reveal-delay-1">
+          <img class="villa-image" src="/images/padelcourts-overzicht.jpeg" alt="De privé-padelcourts onder de Spaanse zon" loading="lazy">
+          <h3 class="feature-list-title">De Courts</h3>
+          <ul class="feature-list">
+            <li>Zes padelcourts binnen wandelafstand</li>
+            <li>Buitenverlichting voor avondsessies</li>
+            <li>Premium speeloppervlak</li>
+            <li>Rackets en ballen inbegrepen</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="placeholder-callout reveal">
+        <strong>Ruben — check:</strong> ik heb "chef-kok" en "eigen golfbaan" uit de eerste versie geschrapt (te grote belofte). Ik heb dit vervangen door "ontbijt en diner op locatie" en "uitzicht op de golfbaan". Klopt dat, of wil je specifiekere teksten? Wat wordt er precies bij welke prijs geregeld?
+      </div>
+
+      <div class="trips-program reveal">
+        <h3 class="trips-program-title">Hoe ziet een week eruit?</h3>
+        <p class="trips-program-text">Dagelijkse trainingen op de courts, wedstrijdvormen in de middag, tijd bij het zwembad en gezamenlijke maaltijden. Aankomst op zondag, vertrek op vrijdag — een compleet programma daartussen.</p>
+      </div>
+
+      <div class="placeholder-callout reveal">
+        <strong>Ruben — vul in:</strong> welke concrete data heb je gepland voor 2026 en 2027? Wat is de prijs (uit de briefing was €749 voor 3d/2n en €995 voor 4d/3n). Is vlucht inbegrepen? Vanaf hoeveel personen kunnen we boeken?
+      </div>
+
+      <div class="cta-group reveal">
+        <a href="#contact" class="btn btn-primary">Stuur een berichtje</a>
+        <a href="#galerij" class="btn btn-secondary-light">Bekijk foto's</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kidslessen -->
+  <section id="kids" class="section-neutral">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Kidslessen</div>
+        <h2 class="section-title">Spelenderwijs beter worden</h2>
+      </div>
+      <div class="kids-body reveal reveal-delay-1">
+        <p>Padel is een sport waarin kinderen spelenderwijs techniek, coördinatie en samenwerking ontwikkelen. Tijdens de kidslessen staat plezier centraal, terwijl kinderen tegelijkertijd groeien als speler.</p>
+        <div class="kids-meta">Proeflessen mogelijk · Voor kinderen van 6 tot 14 jaar <span class="placeholder-note">Voorbeeld leeftijd</span></div>
+        <div class="placeholder-callout">
+          <strong>Ruben — laat weten:</strong> vanaf welke leeftijd geef je kidslessen? Zijn het losse lessen of pakketten? Ook in schoolvakanties? En op welke locatie(s)? Een échte foto van een kidsles zou hier ook heel goed werken.
+        </div>
+        <div class="cta-group">
+          <a href="#contact" class="btn btn-primary">Vraag proefles aan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Over mij -->
+  <section id="over" class="section-light">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Over mij</div>
+        <h2 class="section-title">Ruben Jansma</h2>
+      </div>
+      <div class="about-grid">
+        <div class="reveal reveal-delay-1">
+          <img class="about-portrait" src="/images/ruben-jansma.jpeg" alt="Ruben Jansma op de padelbaan" loading="lazy">
+        </div>
+        <div class="about-body reveal reveal-delay-2">
+          <blockquote class="about-quote">10 jaar padel. 4 jaar les geven. En elke training weer plezier.</blockquote>
+
+          <p>Sport heeft eigenlijk altijd een grote rol gespeeld in mijn leven. Van jongs af aan ben ik bezig geweest met verschillende balsporten, maar mijn eerste kennismaking met padel was tijdens een verblijf in Spanje. Daar sloeg de vonk direct over.</p>
+          <p>Wat begon als nieuwsgierigheid groeide al snel uit tot een echte passie. Ik ben mezelf steeds verder gaan ontwikkelen, ben trainingen gaan volgen en uiteindelijk ook zelf training gaan geven aan spelers van verschillende niveaus.</p>
+          <p>Het mooiste aan lesgeven vind ik om mensen te helpen beter te worden, maar vooral om het plezier en enthousiasme voor de sport over te brengen. Met de trainingen en trips wil ik die passie combineren met alles wat padel zo bijzonder maakt: sport, gezelligheid, ontwikkeling en de unieke Spaanse padelcultuur waar het voor mij allemaal begon.</p>
+
+          <div class="placeholder-callout">
+            <strong>Ruben — bevestig:</strong> ben je KNLTB-gecertificeerd of heb je een andere padel-opleiding gevolgd? Dat geeft veel vertrouwen aan nieuwe klanten. Als er geen certificering is, laten we het weg — helemaal geen probleem, ervaring telt ook.
+          </div>
+
+          <div class="cta-group">
+            <a href="#contact" class="btn btn-primary">Stuur me een berichtje</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section id="reviews" class="section-light">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Reviews <span class="placeholder-note">Voorbeelden</span></div>
+        <h2 class="section-title">Wat spelers zeggen</h2>
+      </div>
+      <div class="reviews-grid reveal reveal-delay-1">
+        <div class="review-card">
+          <p class="review-quote">"Ruben heeft me in vijf lessen echt naar een ander niveau getild. Hij ziet meteen wat er mist én maakt het leuk om aan te werken."</p>
+          <p class="review-author">— Sanne, Zeist</p>
+        </div>
+        <div class="review-card">
+          <p class="review-quote">"De trip naar Spanje was zó goed geregeld. Kleine groep, top coaches, mooie villa. Na een week padel én paella terug naar Nederland met een grote glimlach."</p>
+          <p class="review-author">— Mark & Lisa, Amsterdam</p>
+        </div>
+        <div class="review-card">
+          <p class="review-quote">"We hebben Ruben een bedrijfsclinic laten geven. Iedereen was enthousiast — ook de collega's die nooit padel hadden gespeeld. Hij krijgt iedereen mee."</p>
+          <p class="review-author">— HR-manager, Utrecht</p>
+        </div>
+      </div>
+      <div class="placeholder-callout reveal">
+        <strong>Ruben — verzamel 3 tot 5 échte quotes van klanten.</strong> Eén zin per persoon, met voornaam en woonplaats/functie. Deze zijn nu voorbeelden zodat je ziet hoe het eruit ziet.
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="galerij" class="section-neutral">
+    <div class="container">
+      <div class="reveal gallery-heading">
+        <div class="label">Beeld</div>
+        <h2 class="section-title">Beeld uit Zuid-Spanje</h2>
+      </div>
+
+      <div class="gallery-grid gallery-row-duo reveal" style="margin-bottom: clamp(12px, 2vw, 24px);">
+        <img class="gallery-image gallery-portrait" src="/images/villa-exterieur.jpeg" alt="De villa met palmen en bougainville onder de Spaanse zon" loading="lazy">
+        <img class="gallery-image gallery-portrait" src="/images/padelcourt-detail.jpeg" alt="Detail van een padelcourt naast het mediterrane groen" loading="lazy">
+      </div>
+      <div class="gallery-grid gallery-row-trio reveal reveal-delay-1" style="margin-bottom: clamp(12px, 2vw, 24px);">
+        <img class="gallery-image gallery-tall" src="/images/bougainville.jpeg" alt="Bloeiende bougainville langs de villa" loading="lazy">
+        <img class="gallery-image gallery-tall" src="/images/jacaranda-golfbaan.jpeg" alt="Paarse jacaranda op de golfbaan van Campoamor" loading="lazy">
+        <img class="gallery-image gallery-tall" src="/images/clubhouse-vergezicht.jpeg" alt="Vergezicht over de golfbaan met het clubhuis van Real Club Golf Campoamor" loading="lazy">
+      </div>
+      <div class="gallery-grid gallery-row-duo reveal reveal-delay-2" style="margin-bottom: clamp(12px, 2vw, 24px);">
+        <img class="gallery-image gallery-portrait" src="/images/terras-golfbaan.jpeg" alt="Uitzicht op de golfbaan en palmen vanaf het terras van de villa" loading="lazy">
+        <img class="gallery-image gallery-portrait" src="/images/terras-schemering.jpeg" alt="Het terras van de villa met loungestoelen in de schemering" loading="lazy">
+      </div>
+      <div class="gallery-grid gallery-row-trio reveal reveal-delay-3">
+        <img class="gallery-image gallery-tall" src="/images/centro-deportivo-campoamor.jpeg" alt="Entree van het Centro Deportivo van Real Club Golf Campoamor" loading="lazy">
+        <img class="gallery-image gallery-tall" src="/images/golfbaan-golfkar.jpeg" alt="Golfkar op de Campoamor golfbaan onder de Spaanse zon" loading="lazy">
+        <img class="gallery-image gallery-tall" src="/images/padelbanen-palmen.jpeg" alt="Padelbanen omringd door palmen op het sportcomplex" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section-light">
+    <div class="container">
+      <div class="reveal">
+        <div class="label">Contact</div>
+        <h2 class="section-title">Even sparren?</h2>
+        <p class="form-intro">Laat je gegevens achter, dan neem ik persoonlijk contact met je op — voor training, trip, kidsles of clinic. Meestal binnen 24 uur.</p>
+      </div>
+
+      <div class="contact-grid reveal reveal-delay-1">
+        <form class="inquiry-form" action="https://formsubmit.co/ajax/info@padelescape.nl" method="POST" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="_subject" value="Nieuwe aanvraag via padelescape.nl">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+
+          <div class="form-group">
+            <label class="form-label" for="name">Naam</label>
+            <input class="form-input" type="text" id="name" name="Naam" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">E-mail</label>
+            <input class="form-input" type="email" id="email" name="E-mail" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="interest">Waar ben je in geïnteresseerd?</label>
+            <select class="form-input" id="interest" name="Interesse" required>
+              <option value="" disabled selected>Selecteer</option>
+              <option value="Padel training in Nederland">Padel training in Nederland</option>
+              <option value="Padel trip naar Spanje">Padel trip naar Spanje</option>
+              <option value="Kidsles">Kidsles</option>
+              <option value="Bedrijfsclinic">Bedrijfsclinic</option>
+              <option value="Anders / algemene vraag">Anders / algemene vraag</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">Bericht</label>
+            <textarea class="form-input" id="message" name="Bericht" required placeholder="Vertel kort waar je aan denkt — niveau, gewenste periode, aantal spelers…"></textarea>
+          </div>
+
+          <p class="form-privacy">Je gegevens worden alleen gebruikt om je persoonlijk terug te bellen of mailen. Zie <a href="/new/privacy.html">privacy</a>.</p>
+
+          <button type="submit" class="submit-btn">Stuur bericht</button>
+
+          <div class="form-success" id="form-success">
+            Bedankt voor je aanvraag. Ik neem spoedig persoonlijk contact met je op.
+          </div>
+        </form>
+
+        <aside class="contact-alternatives">
+          <h3 class="contact-alternatives-title">Liever direct?</h3>
+          <p class="contact-alternatives-sub">Snel schakelen kan ook — kies wat jij prettig vindt.</p>
+          <div class="contact-alt-list">
+            <a href="https://wa.me/31648382132" target="_blank" rel="noopener" aria-label="Stuur Ruben een WhatsApp">
+              <span class="contact-alt-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21h.01c5.5 0 9.96-4.46 9.96-9.96 0-2.66-1.04-5.17-2.92-7.05C17.16 3.04 14.7 2 12.04 2zm0 18.13h-.01c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.82-1.31-1.26-2.83-1.26-4.39 0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42 1.56 1.56 2.42 3.63 2.42 5.83.01 4.55-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.98-.14.16-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.16.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.16 0-.43.06-.66.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.12.16 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+              </span>
+              WhatsApp
+            </a>
+            <a href="tel:+31648382132" aria-label="Bel Ruben">
+              <span class="contact-alt-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+              </span>
+              Bel Ruben
+            </a>
+            <a href="mailto:info@padelescape.nl" aria-label="Stuur een e-mail">
+              <span class="contact-alt-icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </span>
+              E-mail
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voor Ruben — samenvatting van placeholders -->
+  <section id="for-ruben" class="section-neutral">
+    <div class="container">
+      <div class="for-ruben-box">
+        <h2>Voor Ruben — nog aan te leveren</h2>
+        <p class="intro">Deze voorstel-versie bevat verbeteringen die ik zelf kon inbouwen. De onderstaande punten heb ik met een gestreepte oranje balk in de pagina gemarkeerd — daar heb ik input of bevestiging van jou voor nodig.</p>
+        <ol class="for-ruben-list">
+          <li><strong>Waar geef je les?<br></strong><span>Op welke padelclub(s), of kom je bij mensen? Bezoekers vragen hier als eerste naar.</span></li>
+          <li><strong>Prijzen bevestigen<br></strong><span>Ik heb voorbeeld­tarieven ingevuld bij elke trainingssoort. Klopt dat ongeveer? Of geef door: privé €X, duo €Y, groep €Z, bedrijfsclinic vanaf €.</span></li>
+          <li><strong>Trip-data en prijzen 2026/2027<br></strong><span>Welke weken staan gepland? Wat is de prijs vanaf, is vlucht erbij, minimum aantal personen?</span></li>
+          <li><strong>Kids-lessen details<br></strong><span>Vanaf welke leeftijd? Losse les of pakket? Ook in schoolvakanties? Op welke locatie(s)? Foto van een kidsles zou ideaal zijn.</span></li>
+          <li><strong>Certificering<br></strong><span>Ben je KNLTB-gecertificeerd of heb je een andere padel-opleiding gevolgd? Dat geeft vertrouwen. Zo niet: laten we weg.</span></li>
+          <li><strong>Reviews van 3-5 klanten<br></strong><span>Eén zin per persoon, met voornaam en woonplaats/functie. De huidige quotes zijn voorbeelden.</span></li>
+          <li><strong>Villa-check: chef-kok en golfbaan<br></strong><span>Ik heb "persoonlijke chef-kok" en "eigen golfbaan" weggehaald — te grote belofte als ze niet 100% waar zijn. Wat mag ik wél precies noemen?</span></li>
+          <li><strong>Actie-foto van jou (optioneel)<br></strong><span>De huidige foto is prima. Een tweede foto van jou tijdens een training met een leerling zou nog sterker zijn.</span></li>
+          <li><strong>Instagram-handle bevestigen<br></strong><span>Is @padelescape juist? Of gebruik je een persoonlijke handle zoals @rubenjansma?</span></li>
+          <li><strong>Torreviejja / Torrevieja spelling<br></strong><span>De echte plaats heet Torrevieja (één j). Ik heb dubbel-j weggehaald in deze versie. Akkoord?</span></li>
+          <li><strong>FormSubmit activeren<br></strong><span>Zoek in info@padelescape.nl naar een mail van FormSubmit en klik één keer op de activatielink. Anders komen aanvragen nergens aan.</span></li>
+          <li><strong>Google Business Profile aanmaken<br></strong><span>business.google.com → profiel voor "Padel Escape" → servicegebied Doorn/Maarn/Zeist/Houten → foto's uploaden. Dit is de #1 vindbaarheid-hefboom.</span></li>
+          <li><strong>Google Search Console<br></strong><span>Zorgt dat Google de site sneller vindt. Ik kan Thijs de verificatie­code doorsturen als jij het account aanmaakt.</span></li>
+          <li><strong>5 klanten om een Google-review vragen<br></strong><span>Reviews op je Google Business Profile duwen je hoger in de lokale zoek­resultaten.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section-dark">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">Padel Escape</div>
+          <p class="footer-tagline">Padel training in Doorn, Maarn, Zeist en Houten. Luxe padel trips naar Zuid-Spanje.</p>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:info@padelescape.nl">info@padelescape.nl</a>
+          <a href="tel:+31648382132">+31 6 4838 2132</a>
+          <a href="https://wa.me/31648382132" target="_blank" rel="noopener">WhatsApp</a>
+          <a href="https://instagram.com/padelescape" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-location">Ruben Jansma · Doorn (NL) · Padel trips: Campoamor (ES)</span>
+        <div class="footer-legal">
+          <a href="/new/privacy.html">Privacy</a>
+          <span class="footer-copy">Padel Escape © 2026</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Nav scroll */
+    const navEl = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      navEl.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* Mobile menu */
+    const menuBtn = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = menuBtn.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      menuBtn.setAttribute('aria-label', isOpen ? 'Menu sluiten' : 'Menu openen');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menuBtn.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', 'Menu openen');
+      });
+    });
+
+    /* Reveal on scroll */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    /* Scroll-spy: highlight actieve nav-link */
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    sections.forEach(s => spy.observe(s));
+
+    /* Form async submit via FormSubmit */
+    async function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('.submit-btn');
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Bezig met verzenden…';
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (!response.ok) throw new Error('Network error');
+        form.querySelectorAll('.form-group, .form-privacy, .submit-btn').forEach(el => el.style.display = 'none');
+        document.getElementById('form-success').style.display = 'block';
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        alert('Er ging iets mis met het verzenden. Stuur je bericht liever direct via WhatsApp of naar info@padelescape.nl');
+      }
+    }
+  </script>
+</body>
+</html>
