@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voorstel — Padel Escape (nieuwe versie)</title>
-  <meta name="description" content="Voorstel-versie van de Padel Escape site met verbeteringen. Niet-indexeerbaar.">
+  <title>Voorstel — Rubén Jansma Trainingen (nieuwe versie)</title>
+  <meta name="description" content="Voorstel-versie van de site van Rubén Jansma Trainingen. Niet-indexeerbaar.">
   <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#1A1A1A">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -16,7 +16,8 @@
       --bg-dark: #1A1A1A;
       --bg-light: #F5F2EB;
       --bg-neutral: #E8E4DC;
-      --accent: #B85A38;
+      --accent: #C9A24B;
+      --accent-ink: #8A6A22;
       --text-dark: #1A1A1A;
       --text-light: #F5F2EB;
       --text-muted: #6E6E73;
@@ -39,7 +40,7 @@
       text-wrap: pretty;
       overflow-x: hidden;
     }
-    ::selection { background: var(--accent); color: var(--text-light); }
+    ::selection { background: var(--accent); color: var(--bg-dark); }
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
@@ -52,7 +53,7 @@
       left: 12px;
       top: -60px;
       background: var(--accent);
-      color: var(--text-light);
+      color: var(--bg-dark);
       padding: 10px 20px;
       font-family: var(--font-heading);
       font-weight: 300;
@@ -100,9 +101,9 @@
       font-size: 0.625rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--accent);
-      background: rgba(184, 90, 56, 0.1);
-      border: 1px dashed rgba(184, 90, 56, 0.5);
+      color: var(--accent-ink);
+      background: rgba(201, 162, 75, 0.12);
+      border: 1px dashed rgba(201, 162, 75, 0.5);
       padding: 3px 8px;
       margin-left: 10px;
       border-radius: 2px;
@@ -110,8 +111,8 @@
       white-space: nowrap;
     }
     .placeholder-callout {
-      border-left: 3px dashed rgba(184, 90, 56, 0.6);
-      background: rgba(184, 90, 56, 0.05);
+      border-left: 3px dashed rgba(201, 162, 75, 0.6);
+      background: rgba(201, 162, 75, 0.05);
       padding: 16px 20px;
       margin-top: 24px;
       font-family: var(--font-body);
@@ -120,11 +121,12 @@
       line-height: 1.6;
     }
     .section-dark .placeholder-callout {
-      background: rgba(184, 90, 56, 0.12);
+      background: rgba(201, 162, 75, 0.12);
       color: rgba(245, 242, 235, 0.85);
     }
+    .section-dark .placeholder-callout strong { color: var(--accent); }
     .placeholder-callout strong {
-      color: var(--accent);
+      color: var(--accent-ink);
       font-weight: 500;
       letter-spacing: 0.02em;
     }
@@ -197,10 +199,10 @@
       transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease, opacity 0.3s ease;
       white-space: nowrap;
     }
-    .btn-primary { color: var(--text-light); background: var(--accent); border-color: var(--accent); }
+    .btn-primary { color: var(--bg-dark); background: var(--accent); border-color: var(--accent); }
     .btn-primary:hover { opacity: 0.85; }
     .btn-secondary-dark { color: var(--text-light); border-color: rgba(245, 242, 235, 0.3); background: transparent; }
-    .btn-secondary-dark:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-secondary-dark:hover { background: var(--accent); border-color: var(--accent); color: var(--bg-dark); }
     .btn-secondary-light { color: var(--text-dark); border-color: rgba(26, 26, 26, 0.2); background: transparent; }
     .btn-secondary-light:hover { background: var(--text-dark); border-color: var(--text-dark); color: var(--text-light); }
     .cta-group { display: flex; gap: 16px; flex-wrap: wrap; margin-top: clamp(32px, 4vw, 48px); }
@@ -230,14 +232,36 @@
     }
     nav.scrolled .nav-inner { padding-top: 14px; padding-bottom: 14px; }
     .logo {
-      font-family: var(--font-heading);
-      font-weight: 300;
-      font-size: 0.9375rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
       color: var(--text-light);
       text-decoration: none;
       white-space: nowrap;
+    }
+    .logo-mark {
+      height: 42px;
+      width: auto;
+      display: block;
+    }
+    .logo-word {
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-heading);
+      font-weight: 300;
+      font-size: 0.9375rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      line-height: 1.25;
+    }
+    .logo-word span {
+      font-size: 0.5625rem;
+      letter-spacing: 0.42em;
+      color: var(--accent);
+    }
+    @media (max-width: 420px) {
+      .logo-word { font-size: 0.8125rem; letter-spacing: 0.18em; }
+      .logo-mark { height: 30px; }
     }
     .nav-links { display: flex; gap: 32px; align-items: center; }
     .nav-links a {
@@ -268,7 +292,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--bg-dark);
       text-decoration: none;
       background: var(--accent);
       border: 1px solid var(--accent);
@@ -340,7 +364,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 30% 30%, rgba(184, 90, 56, 0.06) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 30% 30%, rgba(201, 162, 75, 0.06) 0%, transparent 60%);
       pointer-events: none;
     }
     .hero-split {
@@ -384,7 +408,7 @@
       content: '';
       position: absolute;
       inset: -8px -8px 8px 8px;
-      border: 1px solid rgba(184, 90, 56, 0.4);
+      border: 1px solid rgba(201, 162, 75, 0.4);
       z-index: 0;
     }
     .hero-image {
@@ -518,7 +542,7 @@
       margin-bottom: clamp(24px, 4vw, 40px);
     }
     .trips-program {
-      background: rgba(184, 90, 56, 0.05);
+      background: rgba(201, 162, 75, 0.05);
       border-left: 2px solid var(--accent);
       padding: clamp(24px, 3vw, 40px);
       margin-top: clamp(60px, 8vw, 100px);
@@ -602,7 +626,7 @@
       margin-top: clamp(48px, 6vw, 72px);
     }
     .review-card {
-      background: rgba(184, 90, 56, 0.03);
+      background: rgba(201, 162, 75, 0.03);
       padding: clamp(24px, 3vw, 36px);
       display: flex;
       flex-direction: column;
@@ -699,7 +723,7 @@
       font-size: 0.8125rem;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--text-light);
+      color: var(--bg-dark);
       background: var(--accent);
       border: 1px solid var(--accent);
       padding: 18px 40px;
@@ -764,7 +788,7 @@
       height: 20px;
       align-items: center;
       justify-content: center;
-      color: var(--accent);
+      color: var(--accent-ink);
       flex-shrink: 0;
     }
     .contact-alt-list a:hover .contact-alt-icon { color: var(--text-light); }
@@ -773,7 +797,7 @@
     #for-ruben { padding: clamp(60px, 8vw, 100px) 0; }
     .for-ruben-box {
       background: var(--bg-light);
-      border: 1px dashed rgba(184, 90, 56, 0.5);
+      border: 1px dashed rgba(201, 162, 75, 0.5);
       padding: clamp(28px, 4vw, 48px);
     }
     .for-ruben-box h2 {
@@ -782,7 +806,7 @@
       font-size: clamp(1.25rem, 2vw, 1.5rem);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: var(--accent-ink);
       margin-bottom: 8px;
     }
     .for-ruben-box p.intro {
@@ -811,13 +835,19 @@
       font-weight: 300;
       font-size: 0.8125rem;
       letter-spacing: 0.15em;
-      color: var(--accent);
+      color: var(--accent-ink);
     }
     .for-ruben-list li strong { color: var(--text-dark); font-weight: 500; }
     .for-ruben-list li span { color: var(--text-muted); font-size: 0.9375rem; line-height: 1.7; display: block; }
 
     /* Footer */
     footer { padding: clamp(56px, 8vw, 88px) 0 40px; }
+    .footer-logo {
+      display: block;
+      width: clamp(170px, 22vw, 220px);
+      height: auto;
+      margin-bottom: 20px;
+    }
     .footer-top { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
     .footer-brand {
       font-family: var(--font-heading);
@@ -928,7 +958,10 @@
   <!-- Nav -->
   <nav>
     <div class="nav-inner">
-      <a href="#hero" class="logo">Padel Escape</a>
+      <a href="#hero" class="logo" aria-label="Rubén Jansma Trainingen — naar boven">
+        <img src="/images/logo-mark.png" alt="" class="logo-mark" width="560" height="363">
+        <span class="logo-word">Rubén Jansma<span>Trainingen</span></span>
+      </a>
       <div class="nav-links">
         <a href="#training">Padel Training</a>
         <a href="#trips">Padel Trips</a>
@@ -960,7 +993,7 @@
   <section id="hero" class="section-dark">
     <div class="hero-split">
       <div class="hero-text">
-        <div class="label">Padel Escape · Ruben Jansma</div>
+        <div class="label">Rubén Jansma Trainingen</div>
         <h1 class="hero-headline">Sneller beter worden.<br>Meer plezier op de baan.</h1>
         <p class="hero-sub">Persoonlijke padeltraining in Doorn, Maarn, Zeist en Houten. En luxe padel trips naar Zuid-Spanje. Voor spelers van elk niveau.</p>
         <div class="cta-group">
@@ -988,12 +1021,12 @@
         <div class="training-item">
           <h3 class="training-item-title">Privétraining</h3>
           <p class="training-item-desc">1-op-1 coaching, volledig gericht op jouw techniek en spelinzicht.</p>
-          <span class="training-item-price">€85 per uur · inclusief baanhuur</span>
+          <span class="training-item-price">€95 per uur · inclusief baanhuur</span>
         </div>
         <div class="training-item">
           <h3 class="training-item-title">Groepstraining</h3>
           <p class="training-item-desc">Kleine groepen met veel speeltijd, ideaal om samen te groeien.</p>
-          <span class="training-item-price">€100 per uur · te delen met de groep · incl. baanhuur</span>
+          <span class="training-item-price">€95 per uur · te delen met de groep · incl. baanhuur</span>
         </div>
         <div class="training-item">
           <h3 class="training-item-title">Bedrijfsclinics</h3>
@@ -1097,7 +1130,7 @@
       </div>
       <div class="kids-body reveal reveal-delay-1">
         <p>Padel is een sport waarin kinderen spelenderwijs techniek, coördinatie en samenwerking ontwikkelen. Tijdens de kidslessen staat plezier voorop — en groeien ze tegelijkertijd als speler. Vanaf 6 jaar, losse lessen of voordeliger in een reeks. Ook in schoolvakanties, zolang de trainers beschikbaar zijn.</p>
-        <div class="kids-meta">Vanaf 6 jaar · Losse les €35 (excl. baanhuur) · Reeks van 5 lessen €250 · Proeflessen mogelijk</div>
+        <div class="kids-meta">Vanaf 6 jaar · Losse les €50 · Reeks van 5 lessen €175 · Proeflessen mogelijk</div>
         <div class="placeholder-callout">
           <strong>Nog toe te voegen:</strong> een échte foto van een kidsles maakt deze sectie levendiger. Ruben stuurt die aan.
         </div>
@@ -1273,17 +1306,17 @@
         <h2>Voor Ruben — status en wat er nog nodig is</h2>
         <p class="intro">De meeste van je antwoorden zijn verwerkt in de pagina — hierboven zie je het resultaat. Onderstaande punten staan nog open. Zodra alles binnen is, vervangen we hiermee de huidige homepage.</p>
 
-        <p style="font-family: var(--font-heading); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-top: 2rem; margin-bottom: 1rem;">✓ Al verwerkt</p>
+        <p style="font-family: var(--font-heading); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-ink); margin-top: 2rem; margin-bottom: 1rem;">✓ Al verwerkt</p>
         <ul class="for-ruben-list" style="list-style: none; opacity: 0.7;">
-          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent); font-weight: 500;">✓</span><span>Trainingslocatie: <strong>Padellers Doorn</strong></span></li>
-          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent); font-weight: 500;">✓</span><span>Tarieven: privé €85, groep €100 (te delen), clinics en competitie op aanvraag</span></li>
-          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent); font-weight: 500;">✓</span><span>Kids: vanaf 6 jaar, losse les €35, reeks €250, ook in vakanties</span></li>
-          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent); font-weight: 500;">✓</span><span>Villa-features: golfbaan-toegang, ontbijt en BBQ-avonden</span></li>
-          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent); font-weight: 500;">✓</span><span>Trip praktisch: data in overleg, ex. vluchten, vanaf 3 personen</span></li>
-          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent); font-weight: 500;">✓</span><span>Opleiding: "meerdere padel-opleidingen gevolgd" in Over-mij verwerkt</span></li>
+          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent-ink); font-weight: 500;">✓</span><span>Trainingslocatie: <strong>Padellers Doorn</strong></span></li>
+          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent-ink); font-weight: 500;">✓</span><span>Tarieven: privé en groep €95 per uur incl. baanhuur, clinics en competitie op aanvraag</span></li>
+          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent-ink); font-weight: 500;">✓</span><span>Kids: vanaf 6 jaar, losse les €50, reeks van 5 €175, ook in vakanties</span></li>
+          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent-ink); font-weight: 500;">✓</span><span>Villa-features: golfbaan-toegang, ontbijt en BBQ-avonden</span></li>
+          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent-ink); font-weight: 500;">✓</span><span>Trip praktisch: data in overleg, ex. vluchten, vanaf 3 personen</span></li>
+          <li style="grid-template-columns: 24px 1fr;"><span style="color: var(--accent-ink); font-weight: 500;">✓</span><span>Opleiding: "meerdere padel-opleidingen gevolgd" in Over-mij verwerkt</span></li>
         </ul>
 
-        <p style="font-family: var(--font-heading); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-top: 2.5rem; margin-bottom: 1rem;">Nog nodig van Ruben</p>
+        <p style="font-family: var(--font-heading); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-ink); margin-top: 2.5rem; margin-bottom: 1rem;">Nog nodig van Ruben</p>
         <ol class="for-ruben-list">
           <li><strong>Reviews van 3-5 klanten<br></strong><span>Eén zin per persoon, met voornaam en woonplaats. De drie huidige quotes zijn tijdelijke voorbeelden.</span></li>
           <li><strong>Foto van een échte kidsles<br></strong><span>Maakt de kids-sectie levendiger — een moment van kinderen op de baan.</span></li>
@@ -1291,10 +1324,10 @@
           <li><strong>Instagram-handle bevestigen<br></strong><span>Is @padelescape juist? Of gebruik je liever een persoonlijke handle zoals @rubenjansma?</span></li>
         </ol>
 
-        <p style="font-family: var(--font-heading); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-top: 2.5rem; margin-bottom: 1rem;">Acties buiten de site (grootste vindbaarheid-impact)</p>
+        <p style="font-family: var(--font-heading); font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-ink); margin-top: 2.5rem; margin-bottom: 1rem;">Acties buiten de site (grootste vindbaarheid-impact)</p>
         <ol class="for-ruben-list" start="5">
           <li><strong>FormSubmit activeren<br></strong><span>Check je info@padelescape.nl inbox op een mail van FormSubmit en klik één keer op de activatielink. Zonder deze klik komen contactformulier-aanvragen niet aan.</span></li>
-          <li><strong>Google Business Profile aanmaken<br></strong><span>business.google.com → profiel voor "Padel Escape" → servicegebied Doorn/Maarn/Zeist/Houten → foto's uploaden. Dit is de grootste hefboom voor "padel training in Doorn"-zoekopdrachten.</span></li>
+          <li><strong>Google Business Profile aanmaken<br></strong><span>business.google.com → profiel voor "Rubén Jansma Trainingen" → servicegebied Doorn/Maarn/Zeist/Houten → foto's uploaden. Dit is de grootste hefboom voor "padel training in Doorn"-zoekopdrachten.</span></li>
           <li><strong>Google Search Console<br></strong><span>Ga naar search.google.com/search-console → voeg de site toe (URL prefix: rubenjansma.nl) → kies verificatie via HTML-tag → stuur Thijs de code. Dan submitten we de sitemap.</span></li>
           <li><strong>5 klanten om een Google-review vragen<br></strong><span>Zodra het Business Profile er staat: reviews duwen je hoger in de lokale zoekresultaten. Elke review helpt.</span></li>
         </ol>
@@ -1307,7 +1340,7 @@
     <div class="container">
       <div class="footer-top">
         <div>
-          <div class="footer-brand">Padel Escape</div>
+          <img src="/images/logo-full.png" alt="Rubén Jansma Trainingen" class="footer-logo" width="760" height="638" loading="lazy">
           <p class="footer-tagline">Padel training in Doorn, Maarn, Zeist en Houten. Luxe padel trips naar Zuid-Spanje.</p>
         </div>
         <div class="footer-links">
@@ -1321,7 +1354,7 @@
         <span class="footer-location">Ruben Jansma · Doorn (NL) · Padel trips: Campoamor (ES)</span>
         <div class="footer-legal">
           <a href="/new/privacy.html">Privacy</a>
-          <span class="footer-copy">Padel Escape © 2026</span>
+          <span class="footer-copy">Rubén Jansma Trainingen © 2026</span>
         </div>
       </div>
     </div>
