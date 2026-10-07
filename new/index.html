@@ -829,7 +829,7 @@
       gap: 16px;
       align-items: baseline;
     }
-    .for-ruben-list li::before {
+    ol.for-ruben-list li::before {
       content: counter(rlist, decimal-leading-zero);
       font-family: var(--font-heading);
       font-weight: 300;
@@ -839,6 +839,10 @@
     }
     .for-ruben-list li strong { color: var(--text-dark); font-weight: 500; }
     .for-ruben-list li span { color: var(--text-muted); font-size: 0.9375rem; line-height: 1.7; display: block; }
+    /* tekst altijd in de brede kolom, nooit in het nummer-/vinkjeskolommetje */
+    ol.for-ruben-list li > strong,
+    ol.for-ruben-list li > span { grid-column: 2; }
+    ul.for-ruben-list li > span + span { grid-column: 2; }
 
     /* Footer */
     footer { padding: clamp(56px, 8vw, 88px) 0 40px; }
